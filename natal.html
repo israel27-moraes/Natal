@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NATAL</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            background-image: url('file:///C:/Users/israe/Downloads/R.jfif'); /* Adicione aqui o link da imagem de decoração natalina */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #333;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            width: 80%; /* Aumenta o tamanho da barra de pesquisa */
+            transition: all 0.3s ease;
+        }
+        .search-box {
+            padding: 20px; /* Aumenta o padding para uma barra maior */
+            font-size: 24px; /* Aumenta o tamanho da fonte */
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Remove o tom de verde */
+            background-color: #fff;
+            border: 2px solid #ccc; /* Remove o verde */
+        }
+        .bloc-container {
+            display: none;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ccc; /* Remove o verde */
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px; /* Aumenta o tamanho da fonte */
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Remove o tom de verde */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer; /* Adiciona o cursor de clique */
+            transition: all 0.3s ease;
+        }
+        .bloc-container.active {
+            display: flex;
+        }
+        .top {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-box" id="search-box" placeholder="Digite o nome...">
+    </div>
+    <div id="bloco-container"></div>
+
+    <script>
+        const searchBox = document.getElementById('search-box');
+        const blocoContainer = document.getElementById('bloco-container');
+        const nomes = ['Kátia', 'Jeferson', 'Nicole', 'Vovó Rosana'];
+
+        searchBox.addEventListener('input', function() {
+            const searchValue = searchBox.value.trim().toLowerCase();
+            blocoContainer.innerHTML = ''; // Limpa os blocos anteriores
+
+            if (searchValue) {
+                document.querySelector('.search-container').classList.add('top');
+                const nomeEncontrado = nomes.find(nome => nome.toLowerCase() === searchValue);
+                if (nomeEncontrado) {
+                    const bloco = document.createElement('div');
+                    bloco.id = nomeEncontrado;
+                    bloco.classList.add('bloc-container', 'active');
+                    bloco.innerText = nomeEncontrado;
+                    bloco.addEventListener('click', () => {
+                        let mensagem = '';
+                        if (nomeEncontrado === 'Kátia') {
+                            mensagem = 'Mãe, eu também tenho muito que te agradecer, afinal de contas você também teve a decisão de me tirar de lá, você me deu uma casa, um quarto, comida, e tudo o que eu tenho hoje. Obrigado pelos tapas, arranhões, e pelas broncas. Sei que bastante coisa é para o meu bem, mas vamos concordar que eu tenho uma quantidade grande de regras para seguir. Sei que não sou o filho perfeito, mas poxa, vamos diminuir um pouco as regras. Sei que quando era pequeno eu era um "pimentinha" digamos assim, mas olha no final do ano eu tive um grande avanço e consegui aumentar as notas, e você não precisou mais se incomodar comigo na escola. Gostaria de dizer que hoje em dia a senhora já pode me dar um voto de confiança. Claro, podemos ir com calma, tipo um voto de confiança aqui, outro ali. Você entendeu né? Teremos um novo ano pela frente, eu posso provar que eu mudei, apenas confie.';
+                        } else if (nomeEncontrado === 'Jeferson') {
+                            mensagem = 'Pai, obrigado. Se não fosse por você, eu estaria lá, longe de tudo o que hoje eu tenho. Você foi um grande pai para mim, obrigado pelos tapas, puxões de orelha, pelos sermões, obrigado pela educação que me deste. Obrigado especificamente por ter me dado uma nova chance. Porque se não fosse por você, de ter me tirado do orfanato, hoje eu poderia estar matando, roubando, ou até preso, ou morando na rua, e tantas coisas poderiam ter acontecido. Mas não sou nada disso, sou seu filho, sei que não dou todo o orgulho do mundo, mas me esforço para conseguir dar o maior orgulho. Espero que lá na frente o senhor olhe para trás e pense, VALEU A PENA. Obrigado, você é o melhor, TE AMO PAI.';
+                        } else if (nomeEncontrado === 'Nicole') {
+                            mensagem = 'Maninha, olha a raiva que eu passo com você, mas ainda bem que eu te amo, porque olha, já falei que se você fosse um menino, pode ter certeza de que eu ia te dar uns belos tapas. Mas já que Deus me deu você, só me resta te proteger, de tudo e todos, até os meninos por aí. O pai segura e eu bato, claro, se um deles te fizer algo, pode contar comigo para o que for, afinal de contas, sou seu irmão.';
+                        } else if (nomeEncontrado === 'Vovó Rosana') {
+                            mensagem = 'Oi vovó, essa mensagem foi feita especificamente para a senhora. Primeiro quero te desejar um FELIZ NATAL e quero agradecer por tudo, obrigado por ser a melhor vovó do mundo. Espero que hoje tenha sido um grande dia, aproveite cada momento da vida, obrigado pelas gostosuras que me engordaram. TE AMO.';
+                        }
+                        const newWindow = window.open('', '_blank', 'width=600,height=400,scrollbars=yes');
+                        newWindow.document.write(`
+                            <html>
+                            <head>
+                                <title>Mensagem de Natal</title>
+                                <style>
+                                    body {
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        height: 100vh;
+                                        font-family: Arial, sans-serif;
+                                        background-color: #f9f9f9;
+                                        background-image: url('file:///C:/Users/israe/Downloads/R.jfif'); /* Adicione aqui o link da imagem de fundo */
+                                        background-size: cover;
+                                        color: #333;
+                                        padding: 20px;
+                                        margin: 0;
+                                    }
+                                    .mensagem-container {
+                                        border: 2px solid #ccc;
+                                        border-radius: 15px;
+                                        padding: 20px;
+                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                        background-color: #fff;
+                                        width: 100%;
+                                        max-width: 500px;
+                                        height: 100%;
+                                        max-height: 300px;
+                                        overflow-y: auto;
+                                        font-size: 24px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="mensagem-container">
+                                    ${mensagem}
+                                </div>
+                            </body>
+                            </html>
+                        `);
+                    });
+                    blocoContainer.appendChild(bloco);
+                }
+            } else {
+                document.querySelector('.search-container').classList.remove('top');
+            }
+        });
+    </script>
+</body>
+</html>
